@@ -22,7 +22,14 @@
     h1 {
       font-size: 24px;
       font-weight: 500;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
     button {
       padding: 16px 36px;
@@ -43,7 +50,8 @@
     .message {
       margin-top: 30px;
       font-size: 18px;
-      line-height: 1.5;
+      line-height: 1.6;
+      color: #333;
     }
 
     @keyframes pulse {
@@ -56,23 +64,39 @@
 <body>
   <div class="logo">SOLEPAY</div>
   <h1>👟 Step to Pay</h1>
+  
+  <select id="wallet">
+    <option value="Touch 'n Go eWallet">Touch 'n Go eWallet</option>
+    <option value="GrabPay">GrabPay</option>
+    <option value="Boost">Boost</option>
+  </select>
+  
+  <br>
   <button onclick="makePayment()">Step Here</button>
   <div class="message" id="status"></div>
 
   <script>
     function makePayment() {
       const status = document.getElementById("status");
+      const wallet = document.getElementById("wallet").value;
       const today = new Date();
       const ref = "TXN-" + today.getFullYear()
                    + String(today.getMonth() + 1).padStart(2, '0')
                    + String(today.getDate()).padStart(2, '0')
                    + "-" + Math.floor(1000 + Math.random() * 9000);
 
-      status.innerHTML = `
-        ✅ Payment of RM15 completed via SOLENET!<br>
-        🪙 Paid from: Touch 'n Go eWallet<br>
-        📎 Ref: ${ref}
-      `;
+      status.innerHTML = "🔄 Connecting to SOLENET...";
+
+      setTimeout(() => {
+        status.innerHTML = `🚀 Routing via ${wallet}...`;
+        setTimeout(() => {
+          status.innerHTML = `
+            ✅ Payment of RM15 completed!<br>
+            🪙 Paid from: ${wallet}<br>
+            📎 Ref: ${ref}
+          `;
+        }, 1500);
+      }, 1500);
     }
   </script>
 </body>
