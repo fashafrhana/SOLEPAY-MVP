@@ -13,7 +13,7 @@
       height: 100%;
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #ede3ff, #f5eaff); /* Soft purple chroma gradient */
+      background: linear-gradient(135deg, #ede3ff, #f5eaff); /* Soft purple chroma background */
       color: #333;
       display: flex;
       align-items: center;
@@ -39,13 +39,22 @@
       font-weight: 500;
       margin-bottom: 20px;
     }
+    select, label, input[type="checkbox"] {
+      font-size: 16px;
+    }
     select {
       padding: 12px;
-      font-size: 16px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       width: 100%;
       border-radius: 8px;
       border: 1px solid #ccc;
+    }
+    .toggle {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
     button {
       padding: 14px 24px;
@@ -66,8 +75,17 @@
     .message {
       margin-top: 20px;
       font-size: 16px;
-      line-height: 1.5;
+      line-height: 1.6;
       color: #333;
+    }
+    .badge {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      background-color: #f2f2f2;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: inline-block;
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 10px rgba(0, 196, 106, 0.4); }
@@ -87,7 +105,11 @@
       <option value="Boost">Boost</option>
     </select>
 
-    <br>
+    <div class="toggle">
+      <input type="checkbox" id="donate" />
+      <label for="donate">Round up RM0.35 to support ocean cleanup 🌊</label>
+    </div>
+
     <button onclick="makePayment()">Step Here</button>
     <div class="message" id="status"></div>
   </div>
@@ -96,6 +118,7 @@
     function makePayment() {
       const status = document.getElementById("status");
       const wallet = document.getElementById("wallet").value;
+      const donate = document.getElementById("donate").checked;
       const today = new Date();
       const ref = "TXN-" + today.getFullYear()
                    + String(today.getMonth() + 1).padStart(2, '0')
@@ -106,12 +129,22 @@
 
       setTimeout(() => {
         status.innerHTML = `🚀 Routing via ${wallet}...`;
+
         setTimeout(() => {
-          status.innerHTML = `
+          let msg = `
             ✅ Payment of RM15 completed!<br>
             🪙 Paid from: ${wallet}<br>
-            📎 Ref: ${ref}
+            📎 Ref: ${ref}<br><br>
+            🌱 <strong>Estimated Carbon Impact:</strong> 0.6kg CO₂<br>
+            💚 <strong>Supports:</strong> Local reforestation<br>
           `;
+
+          if (donate) {
+            msg += `🎁 <strong>RM0.35 donated to ocean cleanup initiative 🌊</strong><br>`;
+          }
+
+          msg += `<div class="badge">🌟 Impact Level: Everyday Eco Hero</div>`;
+          status.innerHTML = msg;
         }, 1500);
       }, 1500);
     }
