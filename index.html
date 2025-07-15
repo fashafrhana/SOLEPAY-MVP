@@ -32,84 +32,21 @@
   <div class="message" id="status"></div>
 
   <script>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>SOLEPAY MVP</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 100px;
-      background: #f9f9f9;
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .message {
-      margin-top: 30px;
-      font-size: 20px;
-      color: #333;
-    }
-  </style>
-</head>
-<body>
-  <h1>👟 SOLEPAY: Step to Pay</h1>
-  <button onclick="makePayment()">Step Here</button>
-  <div class="message" id="status"></div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>SOLEPAY MVP</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 100px;
-      background: #f9f9f9;
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .message {
-      margin-top: 30px;
-      font-size: 20px;
-      color: #333;
-    }
-  </style>
-</head>
-<body>
-  <h1>👟 SOLEPAY: Step to Pay</h1>
-  <button onclick="makePayment()">Step Here</button>
-  <div class="message" id="status"></div>
+    function makePayment() {
+      const status = document.getElementById("status");
+      const today = new Date();
+      const ref = "TXN-" + today.getFullYear()
+                   + String(today.getMonth() + 1).padStart(2, '0')
+                   + String(today.getDate()).padStart(2, '0')
+                   + "-" + Math.floor(1000 + Math.random() * 9000);
 
-  <script>
-  function makePayment() {
-    const status = document.getElementById("status");
-    const today = new Date();
-    const ref = "TXN-" + today.getFullYear()
-                 + String(today.getMonth() + 1).padStart(2, '0')
-                 + String(today.getDate()).padStart(2, '0')
-                 + "-" + Math.floor(1000 + Math.random() * 9000);
+      status.innerHTML = `
+        ✅ Payment of RM15 completed via SOLENET!<br>
+        🪙 Paid from: Touch 'n Go eWallet<br>
+        📎 Ref: ${ref}
+      `;
+    }
+  </script>
+</body>
+</html>
 
-    status.innerHTML = `
-      ✅ Payment of RM15 completed via SOLENET!<br>
-      🪙 Paid from: Touch 'n Go eWallet<br>
-      📎 Ref: ${ref}
-    `;
-  }
-</script>
