@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SOLEPAY MVP</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background: #f9f9f9;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>👟 SOLEPAY: Step to Pay</h1>
+  <button onclick="makePayment()">Step Here</button>
+  <div class="message" id="status"></div>
+
+  <script>
+    function makePayment() {
+      document.getElementById("status").innerText = "✅ Payment of RM15 completed via SOLENET!";
+    }
+  </script>
+</body>
+</html>
